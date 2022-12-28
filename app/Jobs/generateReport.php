@@ -63,7 +63,7 @@ class generateReport implements ShouldQueue
         $respuesta = Excel::store(new UsersExport($startDate, $endDate), $nombreArchivo, 'xlsx');
 
         $report = reports::create([
-            'title' => $this->title,
+            'title' => json_encode($respuesta),
             'report_link' => $url, //$url, // url del archivo
         ]);
 
