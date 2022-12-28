@@ -58,7 +58,7 @@ class generateReport implements ShouldQueue
         $current_timestamp = Carbon::now()->timestamp;
         $nombreArchivo = Str::slug($this->title, "-").$current_timestamp.".xlsx";
         $public_path = public_path($nombreArchivo);
-        $url = url('storage/'.$nombreArchivo);
+        $url = asset('storage/'.$nombreArchivo);
 
         $respuesta = Excel::store(new UsersExport($startDate, $endDate), $nombreArchivo, 'xlsx');
 
