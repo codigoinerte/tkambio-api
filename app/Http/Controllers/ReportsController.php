@@ -13,7 +13,9 @@ use Illuminate\Support\Str;
 use App\Exports\UsersExport;
 use App\Jobs\generateReport;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
 
 class ReportsController extends Controller
 {
@@ -103,6 +105,30 @@ class ReportsController extends Controller
         $reports = reports::where('id', $id)->latest()->paginate(12);
         
         return response()->json($reports);
+        
+
+         // TODO: traer reporte guardado en excel
+        
+        //  if($id == ''){
+        //     return response()->json([
+        //         "msg"=>"Falta el id"
+        //     ])->setStatusCode(400);
+        // }
+
+        // $report_link = reports::where('id', $id)->first()->report_link;
+                
+        // $path = storage_path('app/public/'.$report_link);
+
+        // if (File::exists($path)) {
+            
+        //     // return Storage::download($path);
+        //     $path = Storage::path('app/public/'.$report_link);
+        //     return response()->download($path);
+
+        // } else {
+        //     return response()->json([]);
+        // }
+       
     }
 
     /**
