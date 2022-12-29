@@ -66,13 +66,13 @@ class generateReport implements ShouldQueue
 
         
         if (is_file($path)) {
-            $r = "existe!!";
+            $nuevo_titulo = "existe!!";
         } else {
-            $r = "NO existe!!";
+            $nuevo_titulo = "NO existe!!";
         }
 
         $report = reports::create([
-            'title' => $r,
+            'title' => $nuevo_titulo,
             'report_link' => $url, //$url, // url del archivo
         ]);
 
