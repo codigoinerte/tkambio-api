@@ -65,15 +65,15 @@ class generateReport implements ShouldQueue
 
         $path = storage_path('app/public/'.$nombreArchivo);
 
-        if (File::exists($path)) {
-            $existet = "si";
-        } else {
-            $existet = "no";
-        }
+        // if (File::exists($path)) {
+        //     $existet = "si";
+        // } else {
+        //     $existet = "no";
+        // }
 
         $report = reports::create([
-            'title' => $existet,
-            'report_link' => $url, //$url, // url del archivo
+            'title' => $this->title,
+            'report_link' => $nombreArchivo, //$url, // url del archivo
         ]);
 
         return $report;

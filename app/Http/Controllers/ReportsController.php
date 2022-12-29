@@ -12,6 +12,7 @@ use App\Exports\UsersExport;
 use App\Jobs\generateReport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
 
 class ReportsController extends Controller
 {
@@ -99,8 +100,18 @@ class ReportsController extends Controller
         }
 
         $reports = reports::where('id', $id)->latest()->paginate(12);
+                
+        $path = storage_path('app/public/'.$nombreArchivo);
+
+        if (File::exists($path)) {
+            
+            return Storage::download($path);
+
+        } else {
+            return response()->json([]);
+        }
+       
         
-        return response()->json($reports);
     }
 
     /**
