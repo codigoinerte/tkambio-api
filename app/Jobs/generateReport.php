@@ -62,8 +62,17 @@ class generateReport implements ShouldQueue
 
         $respuesta = Excel::store(new UsersExport($startDate, $endDate), $nombreArchivo, 'xlsx');
 
+        $path = storage_path('storage/'.$nombreArchivo);
+
+        
+        if (is_file($path)) {
+            $r = "existe!!";
+        } else {
+            $r = "NO existe!!";
+        }
+
         $report = reports::create([
-            'title' => $this->title,
+            'title' => $r,
             'report_link' => $url, //$url, // url del archivo
         ]);
 
