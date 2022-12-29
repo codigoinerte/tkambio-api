@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use App\Models\User;
 use SplTempFileObject;
 use App\Models\reports;
+use Illuminate\Http\File;
 use Illuminate\Support\Str;
 use App\Exports\UsersExport;
 use App\Jobs\generateReport;
