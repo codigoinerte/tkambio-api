@@ -99,9 +99,9 @@ class ReportsController extends Controller
             ])->setStatusCode(400);
         }
 
-        $reports = reports::where('id', $id)->latest()->paginate(12);
+        $reports = reports::where('id', $id)->latest();
                 
-        $path = storage_path('app/public/'.$nombreArchivo);
+        $path = storage_path('app/public/'.$reports->report_link);
 
         if (File::exists($path)) {
             
