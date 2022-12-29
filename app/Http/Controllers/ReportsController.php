@@ -92,7 +92,7 @@ class ReportsController extends Controller
     public function show(Request $request, $id)
     {
         // TODO: traer reporte guardado en excel
-        
+        /*
         if($id == ''){
             return response()->json([
                 "msg"=>"Falta el id"
@@ -110,8 +110,27 @@ class ReportsController extends Controller
         } else {
             return response()->json([]);
         }
-       
+        */
         
+        if($id == ''){
+            return response()->json([
+                "msg"=>"Falta el id"
+            ])->setStatusCode(400);
+        }
+
+        $report_link = reports::where('id', $id)->first()->report_link;
+                
+        $path = storage_path('app/public/'.$report_link);
+
+        if (File::exists($path)) {
+            
+            // return Storage::download($path);
+            $path = Storage::path('app/public/'.$report_link);
+            return response()->download($path);
+
+        } else {
+            return response()->json([]);
+        }
     }
 
     /**
