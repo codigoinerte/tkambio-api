@@ -9,6 +9,7 @@ use App\Models\reports;
 use Illuminate\Support\Str;
 use App\Exports\UsersExport;
 use Illuminate\Bus\Queueable;
+use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
@@ -60,19 +61,18 @@ class generateReport implements ShouldQueue
         $public_path = public_path($nombreArchivo);
         $url = asset('storage/'.$nombreArchivo);
 
-        $respuesta = Excel::store(new UsersExport($startDate, $endDate), $nombreArchivo, 'xlsx');
+        $respuesta = Excel::store(new UsersExport($startDate, $endDate), $nombreArchivo, 'public');
 
-        $path = storage_path('storage/'.$nombreArchivo);
+        $path = storage_path('app/public/'.$nombreArchivo);
 
-        
-        if (is_file($path)) {
-            $nuevo_titulo = "existe!!";
+        if (File::exists($path)) {
+            $existet = "si";
         } else {
-            $nuevo_titulo = "NO existe!!";
+            $existet = "no";
         }
 
         $report = reports::create([
-            'title' => $nuevo_titulo,
+            'title' => $existet,
             'report_link' => $url, //$url, // url del archivo
         ]);
 
